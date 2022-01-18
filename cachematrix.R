@@ -1,7 +1,7 @@
 ## Put comments here that give an overall description of what your
 ## functions do
 
-## Write a short comment describing this function
+## This function keeps all the cached matrix. If the requested matrix have any cached inverse matrix then it returns the inverse matrix else return null
 
 makeCacheMatrix <- function(x = matrix()) {
     inv <- NULL
@@ -19,20 +19,20 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## Write a short comment describing this function
+## This function makes use of makeCacheMatrix. It first checks if inverse is available and if not then it calculates the inverse and save it into cache using the same makeCacheMatrix.
 
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
-    inv <- x$getinverse
-    if(!is.null(inv)){
+    inverse_matrix <- x$getinverse
+    if(!is.null(inverse_matrix)){
         message("getting cached data")
-        return(inv)
+        return(inverse_matrix)
     }
     
-    matrix_to_invert <- x$get()
-    inv <- solve(matrix_to_invert,...)
-    x$setinverse(inv)
-    inv
+    original_matrix <- x$get()
+    inverse_matrix <- solve(original_matrix,...)
+    x$setinverse(inverse_matrix)
+    inverse_matrix
 }
 
 
